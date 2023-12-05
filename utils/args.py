@@ -1,17 +1,12 @@
-# PSEUDO CODE
-# Set up the info, modes and general arguments
-# We check modes and based on the value we set the specific arguments of that mode
-# Return both args [global && specific]
-    # traceback print 'import traceback; traceback.print_table_tb(e.__traceback__)
-    # print(dir(e))
 import ipaddress
 from argparse import ArgumentParser
 from modules.CustomError import CustomError
 
 def start_arguments():
-    """Start the arguments and options for pynet_scan
+    """
+    Start the arguments and options for pynet_scan
     Returns:
-        argparse.Namespace: store the options and arguments
+        - Namespace: An object containing the parsed arguments and their values
     """
     # set info principal parser
     parser = ArgumentParser(
@@ -39,7 +34,6 @@ def start_arguments():
     host_parser = subparser.add_parser('host', help='scan a specific host')
     host_parser.add_argument(
         'ip',
-        #nargs=1,
         action='store', type=str,
         help='specify de ip of target'
     )
@@ -58,7 +52,11 @@ def start_arguments():
     )
     return parser.parse_args()
 
-# se necesita checkear si los modos u
+"""
+Funtion to check if the ip address its valid. If its not valid throw error
+Args:
+    - ip (str): specify the ip with string format
+"""
 def __check_ip(ip):
     try:
         ipaddress.IPv4Address(ip)
@@ -68,6 +66,11 @@ def __check_ip(ip):
         except ipaddress.AddressValueError as ave:
             raise CustomError(f'Invalid IP address', 10) from ave
     
+"""
+Funtion to check if the arguments and options has been setted correctly
+Args:
+    - args (Namespace): An object containing the parsed arguments and their values
+"""
 def check_args(args):
     if args.mode == 'host':
         CustomError.debug = args.debug
