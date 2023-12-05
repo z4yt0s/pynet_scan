@@ -4,7 +4,6 @@
 # Return both args [global && specific]
     # traceback print 'import traceback; traceback.print_table_tb(e.__traceback__)
     # print(dir(e))
-import sys
 import ipaddress
 from argparse import ArgumentParser
 from modules.CustomError import CustomError
@@ -29,6 +28,11 @@ def start_arguments():
         '-c', '--color',
         action='store_true',
         help='display report colorized format'
+    )
+    parser.add_argument(
+        '-d', '--debug',
+        action='store_true',
+        help='shows more detailed errors'
     )
 
     # set mode 'HOST' and him args
@@ -62,10 +66,11 @@ def __check_ip(ip):
         try:
             ipaddress.IPv6Address(ip)
         except ipaddress.AddressValueError as ave:
-            raise CustomError(f'This IP address its invalid', 10) from ave
+            raise CustomError(f'Invalid IP address', 10) from ave
     
 def check_args(args):
     if args.mode == 'host':
+        CustomError.debug = args.debug
         try:
             __check_ip(args.ip)
         except CustomError as ce:
