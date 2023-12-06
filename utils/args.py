@@ -20,11 +20,6 @@ def start_arguments():
 
     # set global args
     parser.add_argument(
-        '-c', '--color',
-        action='store_true',
-        help='display report colorized format'
-    )
-    parser.add_argument(
         '-d', '--debug',
         action='store_true',
         help='shows more detailed errors'
