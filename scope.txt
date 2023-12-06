@@ -3,7 +3,7 @@ WorkFlows
 [x] create a python file for managment arguments (argsparse) [file=args]
 [x] create a python class for managment and custom erros [file=CustomError] 
 [x] implements in 'main' args and CustomError [file=pynet_scan]
-[] create a file to managment visuals properties, banner, etc [file=?]
+[x] create a file to managment visuals properties, banner, etc [file=?]
 [] personalization help menu
 [] 
 
@@ -19,8 +19,13 @@ Objetives
     [x] create principal class to management the subtype of errors (CustomError)
     [x] create method to process status code and throw specific sub-error (detect_error_type())
     [x] create the template for show reports (__report_info())
+        [] find solution to colored traceback
     [x] create a subclass for arguments errors (ArgsError(CustomError))
         [x] method to decided if the error its critical and close process (handler_panic())
     [] create a subclass for network errors (ArgsError(CustomError))
         [] method to decided if the error its critical and close process (handler_panic())
-    [] implement color and format to errors
+    [+/-] implement color and format to errors
+
+[modules/Visuals.py]
+    [] Create banner
+    [] Create method to convert text in colorized
