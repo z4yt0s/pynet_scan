@@ -4,8 +4,8 @@ WorkFlows
 [x] create a python class for managment and custom erros [file=CustomError] 
 [x] implements in 'main' args and CustomError [file=pynet_scan]
 [] create a file to managment visuals properties, banner, etc [file=?]
-[]
-[]
+[] personalization help menu
+[] 
 
 Objetives
 ---------
@@ -13,6 +13,7 @@ Objetives
     [x] start principal arguments and mode of operation (start_arguments())
     [x] check if the arguments its setted correctly (check_args())
         [x] check ip address and throw personalization error (__check_ip())
+    [] permit 'random' position to global args
 
 [modules/CustomError.py]
     [x] create principal class to management the subtype of errors (CustomError)
