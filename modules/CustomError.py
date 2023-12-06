@@ -1,5 +1,6 @@
 import sys
 from traceback import print_tb
+from Visuals import Visuals
 
 """
 CustomError: A custom error class for handling specific error types and format data
@@ -8,6 +9,7 @@ Atributes:
 """
 class CustomError(Exception):
     debug = False
+    vs = Visuals()
     """
     Args:
         - msg (str): its the message for the error
@@ -47,12 +49,14 @@ class CustomError(Exception):
     Prepare the data recolected about error and show information
     """
     def __report_info(self):
+        text = []
         # if exeption its throw for other classes show original exeption error
         if self.prev_err_info['cause'] is not None:
-            print(f'[!] From: {self.prev_err_info['class']} - {self.prev_err_info['cause']}')
-        print(f'[!] Proc: {self.__cause__.__class__.__name__} - Code[{self.code}]')
-        print(f'[!] Throw: {self.__class__.__name__} - {self.msg}')
+            text.append(str(f'[!] From: {self.prev_err_info['class']} - {self.prev_err_info['cause']}'))
+        text.append(str(f'[!] Proc: {self.__cause__.__class__.__name__} - Code[{self.code}]'))
+        text.append(str(f'[!] Throw: {self.__class__.__name__} - {self.msg}'))
         # traceback option: only if flag --debug its set
+        CustomError.vs.colorized_print(text, type_text='error')
         if CustomError.debug:
             print_tb(self.prev_err_info['traceback'])
             
