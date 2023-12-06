@@ -1,4 +1,5 @@
 from rich.console import Console
+from rich.theme import Theme
 
 """
 Visuals: is in charge of setting, preparing and rendering all the visual elements of 
@@ -18,7 +19,7 @@ class Visuals:
         # i think need early return check later
         #if type_msg == 'default':
             #self.type_msg = Visuals.type_msg
-        self.console = Console(color_system='256', theme=Visuals.type_msg)
+        self.console = Console(color_system='256', theme=Theme(Visuals.type_msg))
     """
     This print the banner of the tool
     """
@@ -38,15 +39,15 @@ class Visuals:
     Explanation:
         If type_text its setted ignore the rest of the styles defined (style and color)
     """
-    def colorized_print(self, text, style, color, type_text=None):
+    def colorized_print(self, text, style=None, color=None, type_text=None):
         if type_text is not None:
-            style = None; color = None
+            # in function of type add ([!], [?], [*])
             match type_text:
-                case 'warning | w':
+                case 'warning': #| w':
                     type_text = Visuals.type_msg['warning']
-                case 'error | e':
+                case 'error': # | e':
                     type_text = Visuals.type_msg['error']
-                case 'info | i':
+                case 'info': # | i':
                     type_text = Visuals.type_msg['info']
             for txt in text: 
                 self.console.print(txt, style=type_text)
