@@ -1,0 +1,25 @@
+WorkFlows
+---------
+[x] create a python file for managment arguments (argsparse) [file=args]
+[x] create a python class for managment and custom erros [file=CustomError] 
+[x] implements in 'main' args and CustomError [file=pynet_scan]
+[] create a file to managment visuals properties, banner, etc [file=?]
+[]
+[]
+
+Objetives
+---------
+[utils/args.py]
+    [x] start principal arguments and mode of operation (start_arguments())
+    [x] check if the arguments its setted correctly (check_args())
+        [x] check ip address and throw personalization error (__check_ip())
+
+[modules/CustomError.py]
+    [x] create principal class to management the subtype of errors (CustomError)
+    [x] create method to process status code and throw specific sub-error (detect_error_type())
+    [x] create the template for show reports (__report_info())
+    [x] create a subclass for arguments errors (ArgsError(CustomError))
+        [x] method to decided if the error its critical and close process (handler_panic())
+    [] create a subclass for network errors (ArgsError(CustomError))
+        [] method to decided if the error its critical and close process (handler_panic())
+    [] implement color and format to errors
