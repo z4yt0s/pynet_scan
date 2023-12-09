@@ -1,6 +1,7 @@
 from time import sleep
 from rich.console import Console
 from rich.theme import Theme
+from rich.panel import Panel
 from rich.text import Text
 
 """
@@ -86,3 +87,31 @@ class Visuals:
             return
         for txt in text_arr:
             self.console.print(f'[{style} {color}]{txt}')
+
+
+    """
+    This return a Panel in base of the content recibed for 'renderable'.
+    Args:
+        - renderable (object): The content to be rendered inside the panel.
+        - border_style (str): The style of the panel's border.
+        - title (str): The title displayed at the top of the panel.
+        - title_align (str): The alignment of the title ('center', 'left', 'right').
+        - style (str): Additional styling for the panel.
+        - expand (bool): Indicates if the panel should expand to fill available space.
+        - dimensions (tuple of float or None): The dimensions (width, height) of the panel.
+        - padding (tuple of int or None): The padding (vertical, horizontal) inside the panel.
+    """
+    def __panel(
+            self, renderable, border_style=None, title=None, title_align='center',
+            style=None, expand=False, dimensions=(None, None), padding=(0,0)
+        ):
+        return Panel(
+            renderable=renderable,
+            border_style=border_style,
+            title=title,
+            title_align=title_align,
+            style=style,
+            expand=expand,
+            dimensions=dimensions,
+            padding=padding
+        )
