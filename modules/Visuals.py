@@ -100,6 +100,8 @@ class Visuals:
         - expand (bool): Indicates if the panel should expand to fill available space.
         - dimensions (tuple of float or None): The dimensions (width, height) of the panel.
         - padding (tuple of int or None): The padding (vertical, horizontal) inside the panel.
+    Returns:
+        Panel: A Panel object created with the provided parameters.
     """
     def __panel(
             self, renderable, border_style=None, title=None, title_align='center',
