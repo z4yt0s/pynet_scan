@@ -58,6 +58,7 @@ class CustomError(Exception):
         # traceback option: only if flag --debug its set
         CustomError.vs.colorized_print(text, type_text='error')
         if CustomError.debug:
+            # SEE LATER
             print_tb(self.prev_err_info['traceback'])
             
 """
