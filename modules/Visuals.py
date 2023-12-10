@@ -1,5 +1,7 @@
 from time import sleep
-from rich.console import Console
+from rich.console import Console, Group
+from rich.table import Table
+from rich.align import Align
 from rich.theme import Theme
 from rich.panel import Panel
 from rich.text import Text
@@ -23,34 +25,46 @@ class Visuals:
         #if type_msg == 'default':
             #self.type_msg = Visuals.type_msg
         self.console = Console(color_system='256', theme=Theme(Visuals.type_msg))
-        self.text = Text()
 
     """
     This print the banner of the tool
     """
     def banner(self):
         name = [
-            '                            __                           ',
-            '    ____  __  ______  ___  / /_     ______________ _____ ',
-            '   / __ \\/ / / / __ \\/ _ \\/ __/    / ___/ ___/ __ `/ __ \\',
-            '  / /_/ / /_/ / / / /  __/ /_     (__  ) /__/ /_/ / / / /',
-            ' / .___/\\__, /_/ /_/\\___/\\__/____/____/\\___/\\__,_/_/ /_/ ',
-            '/_/    /____/              /_____/                       '
+            '                            __                           \n',
+            '    ____  __  ______  ___  / /_     ______________ _____ \n',
+            '   / __ \\/ / / / __ \\/ _ \\/ __/    / ___/ ___/ __ `/ __ \\\n',
+            '  / /_/ / /_/ / / / /  __/ /_     (__  ) /__/ /_/ / / / /\n',
+            ' / .___/\\__, /_/ /_/\\___/\\__/____/____/\\___/\\__,_/_/ /_/\n',
+            '/_/    /____/              /_____/                       \n'
         ]
         logo = [
-            '⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-            '⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀',
-            '⠀⠀⠀⣠⣶⡿⣿⣿⡿⠋⠉⠀⠀⠉⠙⢿⣿⡿⣷⣦⡀⠀⠀⠀',
-            '⠀⢀⣼⠟⠁⢠⣿⠏⠀⠀⢠⣤⣤⡀⠀⠀⢻⣿⡀⠙⢿⣦⠀⠀',
-            '⣰⡟⠁⠀⠀⢸⣿⠀⠀⠀⢿⣿⣿⡟⠀⠀⠈⣿⡇⠀⠀⠙⣷⡄',
-            '⠈⠻⣦⣄⠀⠸⣿⣆⠀⠀⠀⠉⠉⠀⠀⠀⣸⣿⠃⢀⣤⣾⠟⠁',
-            '⠀⠀⠈⠻⣿⣶⣿⣿⣦⣄⠀⠀⠀⢀⣠⣾⣿⣿⣾⡿⠋⠁⠀⠀',
-            '⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⠀⠀⠀⠀⠀',
-            '⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀'
+            '⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n',
+            '⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀\n',
+            '⠀⠀⠀⣠⣶⡿⣿⣿⡿⠋⠉⠀⠀⠉⠙⢿⣿⡿⣷⣦⡀⠀⠀⠀\n',
+            '⠀⢀⣼⠟⠁⢠⣿⠏⠀⠀⢠⣤⣤⡀⠀⠀⢻⣿⡀⠙⢿⣦⠀⠀\n',
+            '⣰⡟⠁⠀⠀⢸⣿⠀⠀⠀⢿⣿⣿⡟⠀⠀⠈⣿⡇⠀⠀⠙⣷⡄\n',
+            '⠈⠻⣦⣄⠀⠸⣿⣆⠀⠀⠀⠉⠉⠀⠀⠀⣸⣿⠃⢀⣤⣾⠟⠁\n',
+            '⠀⠀⠈⠻⣿⣶⣿⣿⣦⣄⠀⠀⠀⢀⣠⣾⣿⣿⣾⡿⠋⠁⠀⠀\n',
+            '⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⠀⠀⠀⠀⠀\n',
+            '⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀\n'
         ]
-        # maybe 0.04 sleep
-        self.colorized_print(name, type_text='i')
-        self.colorized_print(logo, type_text='e')
+        text_name = Text()
+        text_logo = Text()
+
+        for line in name:
+            text_name.append(f'{line}', style='bold dodger_blue3')
+        for line in logo:
+            text_logo.append(f'{line}', style='bold dodger_blue3')
+
+        table_banner = Table.grid(padding=2)
+        table_banner.add_column(no_wrap=True)
+        table_banner.add_row(
+            Align(text_name, vertical='middle'),
+            text_logo
+        )
+
+        self.console.print(table_banner)
 
     """
     Its the charge print with colorized format all the output of the program
@@ -104,8 +118,8 @@ class Visuals:
         Panel: A Panel object created with the provided parameters.
     """
     def __panel(
-            self, renderable, border_style=None, title=None, title_align='center',
-            style=None, expand=False, dimensions=(None, None), padding=(0,0)
+            self, renderable, border_style='none', title=None, title_align='center',
+            style='none', expand=False, padding=(0,0) #dimensions=(None, None), padding=(0,0)
         ):
         return Panel(
             renderable=renderable,
@@ -114,6 +128,6 @@ class Visuals:
             title_align=title_align,
             style=style,
             expand=expand,
-            dimensions=dimensions,
+            #dimensions=dimensions,
             padding=padding
         )
