@@ -1,4 +1,5 @@
 # pynet_scan
+![logo](./img/logo.png)
 
 ## Introduction
 The main reason why this project was born is that nmap reporting is horrible. Also I'm learning offensive Python and I think this is a good project to start with.
